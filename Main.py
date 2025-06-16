@@ -3,6 +3,8 @@ import asyncio
 import os
 import random
 from dotenv import load_dotenv
+from flask import Flask
+from threading import Thread
 
 # Carregar variáveis do .env
 load_dotenv()
@@ -56,3 +58,14 @@ async def start_mention_loop():
 
 
 client.run(TOKEN)
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Estou vivo!"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+Thread(target=run).start()
